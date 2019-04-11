@@ -7,7 +7,7 @@ import json
 
 # define path to config file
 # config_file = sys.argv[1:][0]
-config_file = '.\config.json'
+config_file = './config.json'
 
 # create config parser
 builder = ConfigBuilder()

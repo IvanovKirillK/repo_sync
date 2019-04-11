@@ -1,6 +1,6 @@
 {
   "log": {
-    "path": "./var/log/",
+    "path": "./",
     "filename": "repo_sync.log",
     "size_bytes": 10000,
     "file_count" : 10
@@ -9,6 +9,7 @@
     "vcs": "bitbucket",
     "path": "C:\\Users\\Кирилл\\PycharmProjects\\TestProject\\asm\\",
     "branch": "develop",
+    "repo": "http://ivanov_kk:ckfhjlfrn@192.168.10.208:7990/scm/pfp/asm.git",
     "url": "http://192.168.10.208:7990/rest/api/latest/projects/PFP/repos/asm/commits",
     "params": {
       "until": "develop",
@@ -23,6 +24,7 @@
   },
   "slave": {
     "vcs": "gitlab",
+    "repo": "http://kivanov:Swordfish12!@10.200.12.201/kivanov/test_project2.git",
     "url": "http://10.200.12.201/api/v4/projects/4/repository/commits",
     "params": {
       "name": "develop",
