@@ -7,8 +7,6 @@
   },
   "master": {
     "vcs": "bitbucket",
-    "path": "C:\\Users\\Кирилл\\PycharmProjects\\TestProject\\asm\\",
-    "branch": "develop",
     "url": "http://192.168.10.208:7990/rest/api/latest/projects/PFP/repos/asm/commits",
     "params": {
       "until": "develop",
@@ -17,21 +15,21 @@
     },
     "auth": {
       "type": "basic",
-      "login": "ivanov_kk",
-      "password": "ckfhjlfrn"
+      "login": "123123",
+      "password": "123123"
     }
   },
   "slave": {
     "vcs": "gitlab",
-    "url": "http://10.200.12.201/api/v4/projects/4/repository/commits",
+    "url": "http://10.200.12.201/api/v4/projects/5/repository/branches",
     "params": {
       "name": "develop",
       "since": "date"
     },
     "auth": {
-      "type": "token"},
-    "headers": {
-      "PRIVATE-TOKEN": "5zduXM3W_eisLKxK3JrW"
+      "type": "token",
+      "header_key": "PRIVATE-TOKEN",
+      "header_value": "123123123"
     }
   }
 }
