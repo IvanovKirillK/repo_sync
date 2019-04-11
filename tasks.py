@@ -94,7 +94,7 @@ def gitCheckout(branch_name, repoDir, logger):
     logger.info('Trying to checkout branch')
     logger.info(branch_name)
     try:
-        cmd = ['git', 'checkout', '-b', branch_name]
+        cmd = ['git', 'checkout', branch_name]
         p = subprocess.Popen(cmd, cwd=repoDir)
         p.wait()
     except FileNotFoundError as e:
