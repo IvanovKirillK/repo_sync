@@ -77,7 +77,7 @@ def get_last_commit(branch, logger):
 def gitPull(repoDir, repoUrl, logger):
     logger.info('Trying to pull from master repo')
     try:
-        cmd = ['git', 'pull']
+        cmd = ['git', 'pull', repoUrl]
         p = subprocess.Popen(cmd, cwd=repoDir)
         p.wait()
     except Exception as e:
@@ -105,10 +105,10 @@ def gitCheckout(branch_name, repoDir, logger):
     logger.info('Checkout successfull')
     return True
 
-def gitPush(repoDir, logger):
+def gitPush(branch, repoDir, logger):
     logger.info('Trying to push branch to slave repo')
     try:
-        cmd = ['git', 'push', 'origin','--all']
+        cmd = ['git', 'push', branch]
         p = subprocess.Popen(cmd, cwd=repoDir)
         p.wait()
     except FileNotFoundError as e:
@@ -125,7 +125,7 @@ def sync_branches(master, logger):
     try:
         gitPull(master['path'], master['repo'], logger)
         gitCheckout(master['branch'], master['path'], logger)
-        gitPush(master['path'], logger)
+        gitPush(master['branch'], master['path'], logger)
     except FileNotFoundError as e:
         logger.error('Exception')
         logger.error(master['path'])
