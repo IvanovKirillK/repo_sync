@@ -3,7 +3,9 @@ import errno
 import requests
 import datetime
 import subprocess
+import urllib3
 from requests.auth import HTTPBasicAuth
+from influxdb import InfluxDBClient
 
 
 def check_dir_exists(path):
@@ -105,6 +107,7 @@ def gitCheckout(branch_name, repoDir, logger):
     logger.info('Checkout successfull')
     return True
 
+
 def gitPush(repoDir, logger):
     logger.info('Trying to push branch to slave repo')
     try:
@@ -131,6 +134,30 @@ def sync_branches(master, logger):
         logger.error(master['path'])
         logger.exception('message')
         quit(3)
-    logger.info('Push successfull')
+    logger.info('Sync successfull')
     return True
 
+
+def get_event(measurement, repo, sync_state):
+    log_event = [{"measurement": measurement,
+                    "tags": {
+                        "repo": repo
+                        },
+                    "fields": {
+                        "syncstate": sync_state
+                    }
+                    }]
+    return log_event
+
+
+def write_data_to_db(monitoring, state, logger):
+    event = get_event(monitoring['measurement'], monitoring['repo_name'], state)
+    try:
+        client = InfluxDBClient(monitoring['dbhost'], monitoring['dbport'], monitoring['dbuser'], monitoring['dbpass'], monitoring['dbname'])
+        try:
+            client.write_points(event)
+        except (requests.ConnectionError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError) as e:
+            logger.error('Could net connect to InfluxDB server')
+            return 'No Connect'
+    except Exception as e:
+        logger.error('something went wrong ', str(e))
