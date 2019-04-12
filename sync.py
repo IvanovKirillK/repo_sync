@@ -67,6 +67,7 @@ if master_branch_commit == slave_branch_commit:
     logger.info('branches are equal, do nothing')
 elif master_branch_commit != slave_branch_commit:
     tasks.sync_branches(config['master'], logger)
-# write data to log
-tasks.write_to_Influx(config['monitoring'], 1, logger)
+# write to log
+if config['monitoring']['enabled'] == 'true':
+    tasks.write_to_Influx(config['monitoring'], 1, logger)
 logger.info('Job done, see ya next time!')
