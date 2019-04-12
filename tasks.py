@@ -45,9 +45,9 @@ def get_last_commit(branch, logger):
         if branch['auth']['type'] == 'basic':
             r = requests.get(branch['url'], branch['params'], auth=HTTPBasicAuth(branch['auth']['login'], branch['auth']['password']))
         elif branch['auth']['type'] == 'token':
-            params = branch['params']
-            params['since'] = str((datetime.datetime.now() - datetime.timedelta(hours=24)).isoformat())
-            r = requests.get(branch['url'], params, headers=branch['headers'])
+          #  params = branch['params']
+           # params['since'] = str((datetime.datetime.now() - datetime.timedelta(hours=24)).isoformat())
+            r = requests.get(branch['url'], branch['params'], headers=branch['headers'])
 
         data = r.json()
 
