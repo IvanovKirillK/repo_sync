@@ -42,13 +42,12 @@ def mkdir_p(path):
 def get_last_commit(branch, logger):
     logger.info('Trying to get last commit for branch')
     try:
-        if 'since' in branch['params']:
-            branch['params']['since'] = (datetime.datetime.now() - datetime.timedelta(hours=12)).isoformat()
-
         if branch['auth']['type'] == 'basic':
             r = requests.get(branch['url'], branch['params'], auth=HTTPBasicAuth(branch['auth']['login'], branch['auth']['password']))
         elif branch['auth']['type'] == 'token':
-            r = requests.get(branch['url'], branch['params'], headers=branch['headers'])
+            params = branch['params']
+            params['since'] = (datetime.datetime.now() - datetime.timedelta(hours=12)).isoformat()
+            r = requests.get(branch['url'], params, headers=branch['headers'])
 
         data = r.json()
 
