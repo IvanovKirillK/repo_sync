@@ -150,7 +150,7 @@ def get_event(measurement, repo, sync_state):
     return log_event
 
 
-def write_data_to_db(monitoring, state, logger):
+def write_to_Influx(monitoring, state, logger):
     event = get_event(monitoring['measurement'], monitoring['repo_name'], state)
     try:
         client = InfluxDBClient(monitoring['dbhost'], monitoring['dbport'], monitoring['dbuser'], monitoring['dbpass'], monitoring['dbname'])

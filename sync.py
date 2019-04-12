@@ -58,12 +58,15 @@ master_branch_commit = tasks.get_last_commit(config['master'], logger)
 logger.info('Got last commit for master branch ')
 logger.info(master_branch_commit)
 logger.info('Got last slave branch ')
+# getLast commit from slave repo branch
 slave_branch_commit = tasks.get_last_commit(config['slave'], logger)
 logger.info('Got last commit for slave branch ')
 logger.info(slave_branch_commit)
-
+# compare and sync branches
 if master_branch_commit == slave_branch_commit:
     logger.info('branches are equal, do nothing')
-    sys.exit(0)
 elif master_branch_commit != slave_branch_commit:
     tasks.sync_branches(config['master'], logger)
+# write data to log
+tasks.write_to_Influx(config['monitoring'], 1, logger)
+logger.info('Job done, see ya next time!')
