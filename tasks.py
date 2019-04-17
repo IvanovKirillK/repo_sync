@@ -78,7 +78,7 @@ def get_last_commit(branch, logger):
 def gitPull(repoDir, repoUrl, logger):
     logger.info('Trying to pull from master repo')
     try:
-        cmd = ['git', 'pull', repoUrl]
+        cmd = ['git', 'pull']
         p = subprocess.Popen(cmd, cwd=repoDir)
         p.wait()
     except Exception as e:
