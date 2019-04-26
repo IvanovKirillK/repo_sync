@@ -6,8 +6,8 @@ import tasks
 import json
 
 # define path to config file
-# config_file = sys.argv[1:][0]
-config_file = './config.json'
+config_file = sys.argv[1:][0]
+#config_file = './config.json'
 
 # create config parser
 builder = ConfigBuilder()
@@ -57,7 +57,7 @@ logger.info('Trying to get last commit for master branch ')
 master_branch_commit = tasks.get_last_commit(config['master'], logger)
 logger.info('Got last commit for master branch ')
 logger.info(master_branch_commit)
-logger.info('Got last slave branch ')
+logger.info('Trying to get last commit for master branch ')
 # getLast commit from slave repo branch
 slave_branch_commit = tasks.get_last_commit(config['slave'], logger)
 logger.info('Got last commit for slave branch ')
