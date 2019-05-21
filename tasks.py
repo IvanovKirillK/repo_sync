@@ -78,7 +78,7 @@ def get_last_commit(branch, logger):
 def gitPull(repoDir, repoUrl, logger):
     logger.info('Trying to pull from master repo')
     try:
-        cmd = ['git', 'pull']
+        cmd = ['git', 'pull', '--all']
         p = subprocess.Popen(cmd, cwd=repoDir)
         p.wait()
     except Exception as e:
@@ -126,7 +126,7 @@ def sync_branches(master, logger):
     logger.info('Trying to sync branches')
     try:
         gitPull(master['path'], master['repo'], logger)
-        gitCheckout(master['branch'], master['path'], logger)
+        #gitCheckout(master['branch'], master['path'], logger)
         gitPush(master['path'], logger)
     except FileNotFoundError as e:
         logger.error('Exception')

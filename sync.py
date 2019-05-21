@@ -53,20 +53,18 @@ with open(config_file, 'r', encoding='utf8') as f:
     config = json.load(f)
 
 # getlast commit from main repo branch
-logger.info('Trying to get last commit for master branch ')
-master_branch_commit = tasks.get_last_commit(config['master'], logger)
-logger.info('Got last commit for master branch ')
-logger.info(master_branch_commit)
-logger.info('Trying to get last commit for master branch ')
+#logger.info('Trying to get last commit for master branch ')
+#master_branch_commit = tasks.get_last_commit(config['master'], logger)
+#logger.info('Got last commit for master branch ')
+#logger.info(master_branch_commit)
+#logger.info('Trying to get last commit for master branch ')
 # getLast commit from slave repo branch
-slave_branch_commit = tasks.get_last_commit(config['slave'], logger)
-logger.info('Got last commit for slave branch ')
-logger.info(slave_branch_commit)
+#slave_branch_commit = tasks.get_last_commit(config['slave'], logger)
+#logger.info('Got last commit for slave branch ')
+#logger.info(slave_branch_commit)
 # compare and sync branches
-if master_branch_commit == slave_branch_commit:
-    logger.info('branches are equal, do nothing')
-elif master_branch_commit != slave_branch_commit:
-    tasks.sync_branches(config['master'], logger)
+logger.info('Starting synchronization for ')
+tasks.sync_branches(config['master'], logger)
 # write to log
 if config['monitoring']['enabled'] == 'true':
     tasks.write_to_Influx(config['monitoring'], 1, logger)
